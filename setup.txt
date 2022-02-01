@@ -1,0 +1,4 @@
+install pip
+install enchant c library
+sudo apt-get update
+sudo apt install libenchant-dev
