@@ -33,18 +33,29 @@ def positionToString(pos):
   return string
 
 def run(ans: str):
+  print("Welcome to wordle!")
+  print("You have 6 tries to guess the 5 letter word")
+  print("After you hit enter, you will get a number below each letter of your word")
+  print("0 means that the letter is not in the answer word at all")
+  print("1 means that the letter is in the answer word, but in the wrong place")
+  print("2 means that the letter is in the answer word and in the right place")
+  
   num = 0
   pos = [0] * 5
   while(num < 6 and not victoryCondition(pos) ):
-    guess = input("\nEnter a 5 letter word as your attempt #" + str(num) + "\n")
+    guess = input("\nEnter a 5 letter word as your attempt #" + str(num+1) + "\n")
     if not(verifyWord(guess)):
       print("Invalid word. Words must be 5 letter, real words, with no numbers")
       continue
     pos = getPositionsArray(guess, ans)
     print(positionToString(pos))
     num += 1
-    
 
+  if(victoryCondition(pos)):
+    print("\nCongratulations! You correctly guessed that the word is " + ans + ".")
+  else:
+    print("\nYou are all out of guesses. The word was " + ans + ". Try again next time.")
+    
 def main():
   run("bears")
 
