@@ -1,5 +1,6 @@
 import enchant
-
+import numpy as np
+import random
 def verifyWord(string: str) -> bool:
   d = enchant.Dict("en_US")
   return d.check(string) and len(string) == 5 and string.isalpha()
@@ -55,9 +56,16 @@ def run(ans: str):
     print("\nCongratulations! You correctly guessed that the word is " + ans + ".")
   else:
     print("\nYou are all out of guesses. The word was " + ans + ". Try again next time.")
+
+def loadArray():
+  file = open("answer.csv")
+  array = np.loadtxt(file, delimiter=",", dtype=str)
+  return array
     
 def main():
-  run("bears")
+  array = loadArray()
+  index = random.randint(0, len(array) -1)
+  run(array[index])
 
 if __name__ == "__main__":
     main()
